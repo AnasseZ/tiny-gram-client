@@ -10,6 +10,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserProfilComponent } from './components/user-profil/user-profil.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { RealNavbarComponent } from './components/real-navbar/real-navbar.component';
+import { PostComponent } from './components/post/post.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 
 // Here are my routes
@@ -27,7 +29,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     UserProfilComponent,
     HomePageComponent,
-    RealNavbarComponent
+    RealNavbarComponent,
+    PostComponent,
+    TimelineComponent
   ],
   imports: [
     RouterModule.forRoot(
