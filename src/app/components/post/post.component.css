@@ -1,3 +1,8 @@
-p {
-    size: 10px !important;
+span {
+    display: block;
+}
+
+#username-post {
+    font-style: italic;
+    font-weight: bold;
 }
