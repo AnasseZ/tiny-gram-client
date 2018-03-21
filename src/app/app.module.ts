@@ -14,6 +14,7 @@ import { PostComponent } from './components/post/post.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { WhatsupComponent } from './components/whatsup/whatsup.component';
 
+import { UserService } from './services/UserService';
 
 // Here are my routes
 const appRoutes: Routes = [
@@ -38,11 +39,13 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
