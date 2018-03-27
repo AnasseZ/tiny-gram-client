@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelineComponent implements OnInit {
 
-  constructor() { }
+  postDisplayed: number;
+  posts: number[];
+
+  constructor() { 
+    this.postDisplayed = 10;
+    this.posts = [1,2,3,4,5,5,5];
+  }
 
   ngOnInit() {
   }

@@ -1,3 +1,6 @@
-<app-post></app-post>
-<app-post></app-post>
-<app-post></app-post>
+Affichage des {{ postDisplayed }} derniers posts de votre timeline.
+
+
+<div *ngFor="let post of posts">
+    <app-post></app-post>
+</div>
