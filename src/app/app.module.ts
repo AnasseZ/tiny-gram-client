@@ -16,6 +16,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { WhatsupComponent } from './components/whatsup/whatsup.component';
 
 import { UserService } from './services/UserService';
+import { MessageService } from './services/MessageService';
 
 // Here are my routes
 const appRoutes: Routes = [
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     BrowserModule
   ],
   providers: [
-    UserService
+    UserService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

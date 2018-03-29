@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/UserService';
+import { MessageService } from '../../services/MessageService';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,25 +11,23 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class WhatsupComponent implements OnInit {
 
   postResult: string;
+  after: Date;
 
-  constructor(private userService: UserService, private modalService: NgbModal) { }
+  constructor(private messageService: MessageService, private modalService: NgbModal) { }
 
   ngOnInit() {
   }
 
   postIt() {
-    //this.userService.findAllUser();
-    for(var i = 0; i<100000000; i++) {
-      var b = 2+2;
-    }
+    this.after = this.messageService.postMessage();
   } 
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
       var before = new Date();
       this.postIt();
-      var after = new Date();
-      var difference = after.getMilliseconds() - before.getMilliseconds();
+      //var after = new Date();
+      var difference = this.after.getMilliseconds() - before.getMilliseconds();
       this.postResult = difference + " millisecondes pour poster ce message!";
     }, (reason) => {
       this.postResult = "Poste non envoyé.";
