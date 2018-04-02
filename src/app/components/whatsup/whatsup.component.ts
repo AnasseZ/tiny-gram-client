@@ -12,6 +12,7 @@ export class WhatsupComponent implements OnInit {
 
   postResult: string;
   after: Date;
+  message: Object;
 
   constructor(private messageService: MessageService, private modalService: NgbModal) { }
 
@@ -19,16 +20,16 @@ export class WhatsupComponent implements OnInit {
   }
 
   postIt() {
-    this.after = this.messageService.postMessage();
+    this.messageService.postMessage();
   } 
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
       var before = new Date();
-      this.postIt();
+     // this.message = this.postIt();
       //var after = new Date();
-      var difference = this.after.getMilliseconds() - before.getMilliseconds();
-      this.postResult = difference + " millisecondes pour poster ce message!";
+      //var difference = this.after.getMilliseconds() - before.getMilliseconds();
+      //this.postResult = difference + " millisecondes pour poster ce message!";
     }, (reason) => {
       this.postResult = "Poste non envoyé.";
     });

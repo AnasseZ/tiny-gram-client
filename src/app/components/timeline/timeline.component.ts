@@ -16,7 +16,9 @@ export class TimelineComponent implements OnInit {
   constructor(private messageService: MessageService) { 
     this.postDisplayed = 10;
     this.posts = [1,2,3,4,5,5,5];
-    this.messages =  this.messageService.getTimeLine();
+    //this.messages = this.messageService.getTimeLine();//.then( res => console.log("apres then ",res));;
+    this.messageService.getTimeLine().then( res => { console.log("apres then ",res);  this.messages = res});
+    console.log("mon array", this.messages);
   }
 
   ngOnInit() {
