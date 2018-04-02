@@ -14,12 +14,12 @@
 </div>
 
 <div>
-    <img src="http://insanityraiburari.e-monsite.com/medias/images/berserk-3-.jpg"
+    <img src= "{{ message.imageUrl }} "
     class="img-thumbnail" alt="user profil" width="400" height="200">
-    <p>Voici un mec qui casse tout.</p>
-    <a href="#">#guts</a> 
-    <a href="#">#casca</a>
-    <a href="#">#berserk</a>
+    <p> {{ message.content }}</p>
+    <p >
+        <a *ngFor="let hashtag of message.hashtags" href="#">{{ hashtag }} </a> 
+    </p>
 </div>
 
 <hr>

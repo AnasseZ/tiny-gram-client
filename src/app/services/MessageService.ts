@@ -17,10 +17,10 @@ export class MessageService {
           return gapi.client.messageendpoint
             .insertMessage({
               postId: "testlol", //Math.floor(Math.random() * 1000) + 1 ,
-              content: "Voici un mec qui casse tout.",
+              content: "Young guts.",
               userId: 1,
-              hashtags: ["#guts", "#monster", "#berserk"],
-              imageUrl: "http...."
+              hashtags: ["#guts", "#monster", "#cassetout"],
+              imageUrl: "https://www.ecranlarge.com/uploads/image/001/009/berserk-photo-berserk-1009624.jpg"
             })
             .execute(function(resp) {
               //date = new Date();
@@ -45,8 +45,6 @@ export class MessageService {
           return gapi.client.messageendpoint
             .listMessage()
             .execute(function(resp) {
-              //date = new Date();
-              console.log(resp.items);
               resolve(resp.items);
             });
         },
