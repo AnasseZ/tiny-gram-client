@@ -11,25 +11,24 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class WhatsupComponent implements OnInit {
 
   postResult: string;
-  after: Date;
-  message: Object;
 
-  constructor(private messageService: MessageService, private modalService: NgbModal) { }
+  constructor(private messageService: MessageService, private modalService: NgbModal) { 
+  }
 
   ngOnInit() {
   }
 
-  postIt() {
-    this.messageService.postMessage();
+  postIt(contentInput: string, imgInput: string) {
+    let before = new Date();
+    this.messageService.postMessage(contentInput, imgInput).then( ()=> {
+      let after = new Date();
+      let difference = after.getTime() - before.getTime();
+      this.postResult = difference + " millisecondes pour poster ce message!";
+    });;
   } 
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
-      var before = new Date();
-     // this.message = this.postIt();
-      //var after = new Date();
-      //var difference = this.after.getMilliseconds() - before.getMilliseconds();
-      //this.postResult = difference + " millisecondes pour poster ce message!";
     }, (reason) => {
       this.postResult = "Poste non envoyé.";
     });

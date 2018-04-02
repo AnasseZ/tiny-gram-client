@@ -6,7 +6,7 @@ declare const gapi: any;
 export class MessageService {
   constructor() {}
 
-  postMessage() : any{
+  postMessage(contentInput: string, imgInput: string) : any {
     let promise = new Promise((resolve, reject) => {
       var rootApi = "https://1-dot-tiny-gram.appspot.com/_ah/api/";
 
@@ -16,11 +16,11 @@ export class MessageService {
         function() {
           return gapi.client.messageendpoint
             .insertMessage({
-              postId: "testlol", //Math.floor(Math.random() * 1000) + 1 ,
-              content: "Young guts.",
+              postId:  (Math.floor(Math.random() * 1000) + 1).toString(),
+              content: contentInput,
               userId: 1,
               hashtags: ["#guts", "#monster", "#cassetout"],
-              imageUrl: "https://www.ecranlarge.com/uploads/image/001/009/berserk-photo-berserk-1009624.jpg"
+              imageUrl: imgInput
             })
             .execute(function(resp) {
               //date = new Date();
