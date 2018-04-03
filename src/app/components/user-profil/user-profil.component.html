@@ -7,12 +7,20 @@
       <div class="col-sm-3">
           <h2>Your profil</h2>
       </div>
-      <div class="col-sm-9" id="btn-followed">
-        <h4>Followed by :</h4>
+      <div class="col-sm-3" id="btn-followed">
+        <h5>Account followed by : {{ limit }} people</h5>
         <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary btn-sm">100 people</button>
-            <button type="button" class="btn btn-outline-success btn-sm">1000 people</button>
-            <button type="button" class="btn btn-outline-info btn-sm">5000 people</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimit(100)">100</button>
+            <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimit(1000)" >1000</button>
+            <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimit(5000)">5000</button>
+        </div>
+      </div>
+      <div class="col-sm-3" id="btn-followed">
+        <h5>Getting  {{ limitMsg }} messages</h5>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimitMsg(10)">10</button>
+            <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimitMsg(50)" >50</button>
+            <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimitMsg(100)">100</button>
         </div>
       </div>
     </div>
@@ -41,7 +49,10 @@
             </div>
       </div>
       <div class="col-sm-6">
-        <app-timeline></app-timeline>
+        <app-timeline
+        [limit] = "limit"
+        [limitMsg] = "limitMsg" >
+        </app-timeline>
       </div>
       <div class="col-sm-3"> nothing now</div>
     </div>

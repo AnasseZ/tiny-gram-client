@@ -1,4 +1,6 @@
 <div *ngIf="messages">
+        &nbsp;Account followed by <strong>{{ limit }} </strong> people getting  <strong>{{ limitMsg }} messages: </strong>
+        <p> &nbsp;{{ postResult }} <p>
       <div  *ngFor="let message of messages">
           <app-post
             [message] = "message">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { MessageService } from '../../services/MessageService';
 
@@ -9,18 +9,27 @@ import { MessageService } from '../../services/MessageService';
 })
 export class TimelineComponent implements OnInit {
 
-  postDisplayed: number;
-  posts: number[];
+  postResult: string;
   messages: Object[];
+  @Input() limit: number;
+  @Input() limitMsg: number;
 
   constructor(private messageService: MessageService) { 
     this.messages = [];
-    this.postDisplayed = 10;
-    this.posts = [1,2,3,4,5,5,5];
-    this.messageService.getTimeLine().then( res => { console.log("apres then ",res);  this.messages = res});
+    this.getTimeLineByLimit();
   }
 
   ngOnInit() {
   }
 
+
+  getTimeLineByLimit() {
+    let before = new Date();
+    this.messageService.getTimeLine(this.limit).then( res => { 
+      this.messages = res;
+      let after = new Date();
+      let difference = after.getTime() - before.getTime();
+      this.postResult = difference + " milliseconds for getting your timeline!";
+    });
+  }
 }

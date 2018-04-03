@@ -23,14 +23,14 @@ export class WhatsupComponent implements OnInit {
     this.messageService.postMessage(contentInput, imgInput).then( ()=> {
       let after = new Date();
       let difference = after.getTime() - before.getTime();
-      this.postResult = difference + " millisecondes pour poster ce message!";
+      this.postResult = difference + " millisecondes  for posting your message!";
     });;
   } 
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
-      this.postResult = "Poste non envoyé.";
+      this.postResult = "Post not sended.";
     });
   }
 }

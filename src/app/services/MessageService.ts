@@ -34,7 +34,7 @@ export class MessageService {
     return promise;
   }
   
-  getTimeLine(): any {
+  getTimeLine(limit: number): any {
     let promise = new Promise((resolve, reject) => {
       var rootApi = "https://1-dot-tiny-gram.appspot.com/_ah/api/";
 
@@ -43,7 +43,7 @@ export class MessageService {
         "v1",
         function() {
           return gapi.client.messageendpoint
-            .listMessage()
+            .listMessage("", limit)
             .execute(function(resp) {
               resolve(resp.items);
             });

@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfilComponent implements OnInit {
 
-  constructor() { }
+  limit: number;
+  limitMsg: number;
+
+  constructor() {
+    this.limit = 100;
+    this.limitMsg = 10;
+   }
 
   ngOnInit() {
+  }
+
+  updateLimit(limit: number) {
+    this.limit = limit;
+  }
+
+  updateLimitMsg(limitMsg: number) {
+    this.limitMsg = limitMsg;
   }
 
 }
