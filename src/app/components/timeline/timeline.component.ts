@@ -14,8 +14,9 @@ export class TimelineComponent implements OnInit {
   @Input() limit: number;
   @Input() limitMsg: number;
 
-  constructor(private messageService: MessageService) { 
+  constructor(private messageService: MessageService) {
     this.messages = [];
+    this.postResult = "Gettin your timeline...";
     this.getTimeLineByLimit();
   }
 

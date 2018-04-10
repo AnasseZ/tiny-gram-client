@@ -11,11 +11,11 @@ export class UserProfilComponent implements OnInit {
   limitMsg: number;
 
   constructor() {
-    this.limit = 100;
-    this.limitMsg = 10;
    }
 
   ngOnInit() {
+    this.limit = 100;
+    this.limitMsg = 10;
   }
 
   updateLimit(limit: number) {
