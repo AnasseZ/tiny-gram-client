@@ -18,7 +18,7 @@ export class UserProfilComponent implements OnInit {
   ngOnInit() {
     this.limit = 100;
     this.limitMsg = 10;
-    this.getUser("u0");
+    this.getUser();
   }
 
   updateLimit(limit: number) {
@@ -29,9 +29,18 @@ export class UserProfilComponent implements OnInit {
     this.limitMsg = limitMsg;
   }
 
-  getUser(userId: String): void {
+  getUser(): void {
+    let userChosed;
+    if ( this.limit == 100 ) {
+      userChosed = "u0";
+    } else if (this.limit == 1000 ) {
+      userChosed = "u1";
+    } else if (this.limit == 5000 ) {
+      userChosed = "u2";
+    }
+
     let before = new Date();
-    this.userService.getUser(userId)
+    this.userService.getUser(userChosed)
         .subscribe(
             resultArray => {
               this.user = resultArray;

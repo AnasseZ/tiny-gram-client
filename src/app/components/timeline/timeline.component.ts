@@ -13,6 +13,7 @@ export class TimelineComponent implements OnInit {
   messages: Object[];
   @Input() limit: number;
   @Input() limitMsg: number;
+  loading: boolean;
 
   constructor(private messageService: MessageService) {
   }
@@ -20,6 +21,7 @@ export class TimelineComponent implements OnInit {
   ngOnInit() {
     this.messages = [];
     this.postResult = "Gettin your timeline...";
+    this.loading = true;
     //this.getTimeLineByLimit();
     //this.getTimeline();
   }
@@ -34,14 +36,19 @@ export class TimelineComponent implements OnInit {
       this.postResult = difference + " milliseconds for getting your timeline!";
     });
   } */
+  ngOnChanges(changes) {
+    console.log("hello !");
+    //this.getTimeline();
+  } 
 
   getTimeline(): void {
     let before = new Date();
     this.messageService.getTimeline(this.limitMsg)
         .subscribe(
             resultArray => {
-              this.messages = resultArray;             
+              this.messages = resultArray;            
               let after = new Date();
+              this.loading = false;
               let difference = after.getTime() - before.getTime();
               this.postResult = difference + " milliseconds for getting your timeline!";
             },
