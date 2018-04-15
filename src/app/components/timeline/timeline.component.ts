@@ -21,7 +21,7 @@ export class TimelineComponent implements OnInit {
     this.messages = [];
     this.postResult = "Gettin your timeline...";
     //this.getTimeLineByLimit();
-    this.getTimeline();
+    //this.getTimeline();
   }
 
   /*
@@ -37,7 +37,7 @@ export class TimelineComponent implements OnInit {
 
   getTimeline(): void {
     let before = new Date();
-    this.messageService.getTimeline()
+    this.messageService.getTimeline(this.limitMsg)
         .subscribe(
             resultArray => {
               this.messages = resultArray;             
@@ -47,5 +47,5 @@ export class TimelineComponent implements OnInit {
             },
             error => console.log("Error :: " + error)
         )
-}
+  }
 }

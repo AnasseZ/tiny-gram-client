@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SafeUrl, DomSanitizer} from '@angular/platform-browser';
 import { MessageService } from '../../services/MessageService';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -10,9 +11,10 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class WhatsupComponent implements OnInit {
 
+  @Input() avatar: string;
   postResult: string;
 
-  constructor(private messageService: MessageService, private modalService: NgbModal) { 
+  constructor(private messageService: MessageService, private modalService: NgbModal, private sanitizer: DomSanitizer) { 
   }
 
   ngOnInit() {
@@ -20,11 +22,11 @@ export class WhatsupComponent implements OnInit {
 
   postIt(contentInput: string, imgInput: string) {
     let before = new Date();
-    this.messageService.postMessage(contentInput, imgInput).then( ()=> {
+    /*this.messageService.postMessage(contentInput, imgInput).then( ()=> {
       let after = new Date();
       let difference = after.getTime() - before.getTime();
       this.postResult = difference + " millisecondes  for posting your message!";
-    });;
+    });; */
   } 
 
   open(content) {
@@ -32,5 +34,9 @@ export class WhatsupComponent implements OnInit {
     }, (reason) => {
       this.postResult = "Post not sended.";
     });
+  }
+
+  avatarUrl() {
+    return this.sanitizer.bypassSecurityTrustUrl(this.avatar);
   }
 }

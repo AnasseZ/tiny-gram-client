@@ -5,7 +5,6 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3">
-          <h2>Your profil</h2>
       </div>
       <div class="col-sm-3" id="btn-followed">
         <h5>Account followed by : {{ limit }} people</h5>
@@ -33,20 +32,24 @@
       </div>
       <div class="col-sm-6">
         <span style="font-style:italic">What's up?</span>
-        <app-whatsup></app-whatsup>
+        <app-whatsup 
+        [avatar] = "user.avatar">
+      </app-whatsup>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-          <div class="card" style="width:250px">
-              <img class="card-img-top" src="https://vignette.wikia.nocookie.net/pelea-versus/images/8/84/16Gatsu-Guts-Berserk-Manga.jpg/revision/latest/scale-to-width-down/439?cb=20141103194702&path-prefix=es"
+        <div *ngIf="user" >
+          <div class="card" style="width:250px;">
+              <img class="card-img-top" src="{{ user.avatar }}"
                alt="Your avatar">
               <div class="card-body">
-                <h4 class="card-title">Benjamin Franklin</h4>
-                <p class="card-text">@benja44</p>
+                <h4 class="card-title">{{ user.firstName }} {{ user.lastName }}</h4>
+                <p class="card-text">{{ user.userName }}</p>
                 <button href="#" class="btn btn-outline-dark">Settings</button>
               </div>
             </div>
+         </div>
       </div>
       <div class="col-sm-6">
         <app-timeline

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-1">
-        <img src="https://vignette.wikia.nocookie.net/pelea-versus/images/8/84/16Gatsu-Guts-Berserk-Manga.jpg/revision/latest/scale-to-width-down/439?cb=20141103194702&path-prefix=es" 
+        <img  *ngIf="avatar" [src]='avatarUrl()' 
         class="rounded-circle " alt="profil avatar" width="50" height="50">
     </div>
     <div class="col-sm-9">

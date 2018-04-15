@@ -3,16 +3,16 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 
-declare const gapi: any;
+//declare const gapi: any;
 
 @Injectable()
 export class MessageService {
 
-  private URL = "https://jsonplaceholder.typicode.com/posts";
-  private API_URL = "https://1-dot-tiny-gram.appspot.com/_ah/api/messageendpoint/v1/timeline/";
+  private API_URL = "https://1-dot-tiny-gram.appspot.com/_ah/api/messageendpoint/v1/";
 
   constructor(private http: Http) {}
 
+  /*
   postMessage(contentInput: string, imgInput: string) : any {
     let promise = new Promise((resolve, reject) => {
       var rootApi = "https://1-dot-tiny-gram.appspot.com/_ah/api/";
@@ -39,7 +39,7 @@ export class MessageService {
       );
     });
     return promise;
-  }
+  }*/
   
   /* 
   getTimeLine(limit: number): any {
@@ -62,16 +62,16 @@ export class MessageService {
     return promise;
   } */
 
-  getTimeline(): Observable<Object[]> {
+  getTimeline(limit: number): Observable<Object[]> {
     return this.http
-        .get(this.API_URL)
+        .get(this.API_URL +'u280/get-timeline/?limit=' + 10)
         .map((response: Response) => {
             return <Object[]>response.json().items;
         })
         .catch(this.handleError);
-}
+  }
 
-private handleError(error: Response) {
-    return Observable.throw(error.statusText);
-}
+  private handleError(error: Response) {
+      return Observable.throw(error.statusText);
+  }
 }
