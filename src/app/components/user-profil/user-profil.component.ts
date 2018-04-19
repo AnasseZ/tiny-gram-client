@@ -22,7 +22,10 @@ export class UserProfilComponent implements OnInit {
   }
 
   updateLimit(limit: number) {
-    this.limit = limit;
+      if( this.limit! = limit) {
+        this.limit = limit;
+        this.getUser();
+      }
   }
 
   updateLimitMsg(limitMsg: number) {
@@ -30,17 +33,7 @@ export class UserProfilComponent implements OnInit {
   }
 
   getUser(): void {
-    let userChosed;
-    if ( this.limit == 100 ) {
-      userChosed = "u0";
-    } else if (this.limit == 1000 ) {
-      userChosed = "u1";
-    } else if (this.limit == 5000 ) {
-      userChosed = "u2";
-    }
-
-    let before = new Date();
-    this.userService.getUser(userChosed)
+    this.userService.getUser(this.limit)
         .subscribe(
             resultArray => {
               this.user = resultArray;

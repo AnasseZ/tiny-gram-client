@@ -3,6 +3,8 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 
+import { getUserByLimit } from './Utils'; 
+
 //declare const gapi: any;
 
 @Injectable()
@@ -62,9 +64,9 @@ export class MessageService {
     return promise;
   } */
 
-  getTimeline(limit: number): Observable<Object[]> {
+  getTimeline(limitMsg: number, limit: number): Observable<Object[]> {
     return this.http
-        .get(this.API_URL +'u280/get-timeline/?limit=' + 10)
+        .get(this.API_URL + getUserByLimit(limit) +'/get-timeline/'+  limitMsg)
         .map((response: Response) => {
             return <Object[]>response.json().items;
         })
@@ -73,5 +75,14 @@ export class MessageService {
 
   private handleError(error: Response) {
       return Observable.throw(error.statusText);
+  }
+
+  postMessage(incompleteMessage: Object): Observable<Object[]> {
+    return this.http
+        .post(this.API_URL + 'create-message', incompleteMessage)
+        .map((response: Response) => {
+            return <Object[]>response.json().items;
+        })
+        .catch(this.handleError);
   }
 }

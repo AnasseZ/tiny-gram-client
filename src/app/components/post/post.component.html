@@ -1,14 +1,14 @@
 <br>
 <div class="row">
   <div class="col-sm-1">
-    <img src="https://vignette.wikia.nocookie.net/dbz-dokkanbattle/images/9/98/SuperVegito.png/revision/latest?cb=20160906131449" 
+    <img src="{{ message.user.avatar }} "
     class="rounded-circle " alt="profil avatar" width="50" height="50"> 
   </div>
 
   <div class="col-sm-9"> 
       <p>
-        <span>Enrico Eclypsia</span>
-        <span id="username-post">@dokkan33</span>
+        <span>{{ message.user.firstName }} {{ message.user.lastName }}</span>
+        <span id="username-post">{{ message.user.userName }}</span>
       </p>
   </div>
 </div>

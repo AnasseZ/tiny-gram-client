@@ -4,6 +4,8 @@ import { MessageService } from '../../services/MessageService';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
+import { getSplitedContent } from "../../services/Utils";
+
 @Component({
   selector: 'app-whatsup',
   templateUrl: './whatsup.component.html',
@@ -11,7 +13,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class WhatsupComponent implements OnInit {
 
-  @Input() avatar: string;
+  @Input() user: Object;
   postResult: string;
 
   constructor(private messageService: MessageService, private modalService: NgbModal, private sanitizer: DomSanitizer) { 
@@ -21,12 +23,28 @@ export class WhatsupComponent implements OnInit {
   }
 
   postIt(contentInput: string, imgInput: string) {
+    let splitedContent = getSplitedContent(contentInput);
+
+    let incompleteMessage = {
+        followers: this.user.followers,
+        imageUrl: imgInput,
+        userId: this.user.id,
+        hashtags: splitedContent.slice(1),
+        content: splitedContent[0]
+    };
+
+    //console.log(incompleteMessage);
+
     let before = new Date();
-    /*this.messageService.postMessage(contentInput, imgInput).then( ()=> {
-      let after = new Date();
-      let difference = after.getTime() - before.getTime();
-      this.postResult = difference + " millisecondes  for posting your message!";
-    });; */
+    this.messageService.postMessage(incompleteMessage)
+        .subscribe(
+            resultArray => {           
+              let after = new Date();
+              let difference = after.getTime() - before.getTime();
+              this.postResult = difference + " millisecondes  for posting your message!";
+            },
+            error => console.log("Error :: " + error)
+        );
   } 
 
   open(content) {
@@ -37,6 +55,6 @@ export class WhatsupComponent implements OnInit {
   }
 
   avatarUrl() {
-    return this.sanitizer.bypassSecurityTrustUrl(this.avatar);
+    return this.sanitizer.bypassSecurityTrustUrl(this.user.avatar);
   }
 }

@@ -3,6 +3,8 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 
+import { getUserByLimit } from './Utils'; 
+
 //declare const gapi: any;
 
 @Injectable()
@@ -40,9 +42,9 @@ export class UserService {
     );
   } */
 
-  getUser(id: String): Observable<Object> {
+  getUser(limit: number): Observable<Object> {
     return this.http
-      .get(this.API_URL +'findUser/' + id)
+      .get(this.API_URL +'findUser/' + getUserByLimit(limit))
       .map((response: Response) => {
           return <Object[]>response.json();
       })
