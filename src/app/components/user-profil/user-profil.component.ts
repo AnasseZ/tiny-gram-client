@@ -53,12 +53,23 @@ export class UserProfilComponent implements OnInit {
   }
 
   findUser(username: string) {
-    console.log(username);
-    this.userSearched = this.user;
+    this.userService.findUserByUsername(username)
+    .subscribe(
+        resultArray => {
+          this.userSearched = resultArray;
+        },
+        error => console.log("Error :: " + error)
+    );
   }
 
   followUser() {
-    console.log(this.user);
+    this.userService.followerUser(this.userSearched, this.user.id)
+    .subscribe(
+        resultArray => {
+          this.userSearched = resultArray;
+        },
+        error => console.log("Error :: " + error)
+    );
     this.userSearched = null;
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from '../../services/MessageService';
+import { Message } from '../../entity/Message';
 
 @Component({
   selector: 'app-hashtag-search',
@@ -8,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class HashtagSearchComponent implements OnInit {
 
   limit: number;
-  constructor() { }
+  messages: Message[];
+  loading: boolean;
+  postResult: string;
+
+  constructor(private messageService: MessageService) { }
 
   updateLimit(limit: number) {
     if( this.limit! = limit) {
@@ -18,5 +24,44 @@ export class HashtagSearchComponent implements OnInit {
 
   ngOnInit() {
     this.limit = 5;
+    this.loading = false;
+  }
+
+  searchByHashtag(hashtag: string) {
+
+    if(hashtag.charAt(0) === "#") {
+      hashtag = hashtag.slice(1);
+    }
+    this.messages = [];
+    this.loading = true;
+    let before = new Date();
+    this.messageService.getByHashtag(hashtag, this.limit)
+        .subscribe(
+            resultArray => {
+              this.messages = resultArray;            
+              let after = new Date();
+              this.loading = false;
+              let difference = after.getTime() - before.getTime();
+              this.postResult = difference + " milliseconds for getting posts with the hashtag " +  hashtag + " !";
+            },
+            error => console.log("Error :: " + error)
+        )
+  }
+
+  searchByUser(username: string) {
+    this.messages = [];
+    this.loading = true;
+    let before = new Date();
+    this.messageService.getByUsername(username, this.limit)
+        .subscribe(
+            resultArray => {
+              this.messages = resultArray;            
+              let after = new Date();
+              this.loading = false;
+              let difference = after.getTime() - before.getTime();
+              this.postResult = difference + " milliseconds for getting posts from " +  username + " !";
+            },
+            error => console.log("Error :: " + error)
+        )
   }
 }

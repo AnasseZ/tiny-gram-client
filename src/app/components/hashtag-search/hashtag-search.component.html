@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="col-sm-2">
-        <button (click)="open(hashtag.value)" type="button" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
+        <button (click)="searchByHashtag(hashtag.value);" type="button" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
     </div>
   <div class="col-sm-3">
         <div class="form-group">
@@ -38,11 +38,11 @@
         </div>
     </div>
     <div class="col-sm-2">
-      <button (click)="open(userName.value)" type="button" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
+      <button (click)="searchByUser(userName.value);" type="button" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
     </div>
     <div class="col-sm-1"> </div>
 </div>
-
+<br>
 <div class="row">
     <div class="col-sm-3"> </div>
     <div class="col-sm-6">
@@ -55,7 +55,6 @@
             </app-post>
           </div>
     </div>
-
     <div *ngIf = "loading" style=" text-align: center;">
             <i class="fas fa-circle-notch fa-spin" style="font-size:50px; color:slategrey"></i>
      </div>

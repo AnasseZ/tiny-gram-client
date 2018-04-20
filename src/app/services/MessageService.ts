@@ -86,4 +86,22 @@ export class MessageService {
         })
         .catch(this.handleError);
   }
+
+  getByHashtag(hashtag: string, limit: number) {
+    return this.http
+    .get(this.API_URL + 'get-messages/'+ hashtag + '/'+ limit)
+    .map((response: Response) => {
+        return <Message[]>response.json().items;
+    })
+    .catch(this.handleError);
+  }
+
+  getByUsername(username: string, limit: number) {
+    return this.http
+    .get(this.API_URL + 'get-messages-by/'+ username + '/'+ limit)
+    .map((response: Response) => {
+        return <Message[]>response.json().items;
+    })
+    .catch(this.handleError);
+  }
 }

@@ -52,6 +52,24 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  findUserByUsername(userName: string) {
+    return this.http
+      .get(this.API_URL +'find-by-username/' + userName)
+      .map((response: Response) => {
+          return <User[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  followerUser(user: User, userId: String) {
+    return this.http
+    .post(this.API_URL + 'follow-user/' + userId, user)
+    .map((response: Response) => {
+        return <User[]>response.json().items;
+    })
+    .catch(this.handleError);
+  }
+
   createUser(id: number, user: Object): Observable<Object> {
     return this.http
       .get(this.API_URL +'findUser/' + id)
@@ -64,4 +82,6 @@ export class UserService {
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
   }
+
+
 }
