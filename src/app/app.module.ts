@@ -18,12 +18,15 @@ import { WhatsupComponent } from './components/whatsup/whatsup.component';
 
 import { UserService } from './services/UserService';
 import { MessageService } from './services/MessageService';
+import { HashtagSearchComponent } from './components/hashtag-search/hashtag-search.component';
 
 // Here are my routes
 const appRoutes: Routes = [
   { path: 'user-profil', component: UserProfilComponent },
   { path: 'home-page', component: HomePageComponent },
   { path: '', redirectTo: '/home-page', pathMatch: 'full'}
+  { path: 'search-hashtags', component: HashtagSearchComponent },
+  { path: 'search-hashtags/:hashtag', component: HashtagSearchComponent },
 ];
 
 @NgModule({
@@ -37,7 +40,8 @@ const appRoutes: Routes = [
     RealNavbarComponent,
     PostComponent,
     TimelineComponent,
-    WhatsupComponent
+    WhatsupComponent,
+    HashtagSearchComponent
   ],
   imports: [
     RouterModule.forRoot(

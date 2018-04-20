@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/UserService';
+import { User } from '../../entity/User';
+
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-profil',
@@ -10,9 +13,10 @@ export class UserProfilComponent implements OnInit {
 
   limit: number;
   limitMsg: number;
-  user: Object;
+  user: User;
+  userSearched: User;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private modalService: NgbModal) {
    }
 
   ngOnInit() {
@@ -42,4 +46,23 @@ export class UserProfilComponent implements OnInit {
         )
   }
 
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+    }, (reason) => {
+    });
+  }
+
+  findUser(username: string) {
+    console.log(username);
+    this.userSearched = this.user;
+  }
+
+  followUser() {
+    console.log(this.user);
+    this.userSearched = null;
+  }
+
+  updateInformations(username: string, firstname: string, lastname: string, avatar: string) {
+
+  }
 }

@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 
 import { getUserByLimit } from './Utils'; 
+import { Message } from '../entity/Message';
 
 //declare const gapi: any;
 
@@ -64,11 +65,11 @@ export class MessageService {
     return promise;
   } */
 
-  getTimeline(limitMsg: number, limit: number): Observable<Object[]> {
+  getTimeline(limitMsg: number, limit: number): Observable<Message[]> {
     return this.http
         .get(this.API_URL + getUserByLimit(limit) +'/get-timeline/'+  limitMsg)
         .map((response: Response) => {
-            return <Object[]>response.json().items;
+            return <Message[]>response.json().items;
         })
         .catch(this.handleError);
   }
@@ -77,11 +78,11 @@ export class MessageService {
       return Observable.throw(error.statusText);
   }
 
-  postMessage(incompleteMessage: Object): Observable<Object[]> {
+  postMessage(incompleteMessage: Object): Observable<Message[]> {
     return this.http
         .post(this.API_URL + 'create-message', incompleteMessage)
         .map((response: Response) => {
-            return <Object[]>response.json().items;
+            return <Message[]>response.json().items;
         })
         .catch(this.handleError);
   }

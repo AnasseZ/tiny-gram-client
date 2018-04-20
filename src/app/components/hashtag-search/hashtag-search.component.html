@@ -1,0 +1,65 @@
+<app-real-navbar></app-real-navbar>
+
+<br>
+<br>
+<div class="row">
+  <div class="col-sm-1"> </div>
+  <div class="col-sm-3" id="btn-followed">
+      <h5>Getting  {{ limit }} results</h5>
+      <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimit(5)">5</button>
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimit(10)">10</button>
+          <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimit(50)">50</button>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-3">   <p>Find posts by Hashtags</p> </div>
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-3">   <p>Find posts from a User by his username</p> </div>
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-1"> </div>
+</div>
+<div class="row">
+  <div class="col-sm-1"> </div>
+  <div class="col-sm-3">
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="usr" #hashtag>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <button (click)="open(hashtag.value)" type="button" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
+    </div>
+  <div class="col-sm-3">
+        <div class="form-group">
+            <input type="text" class="form-control" id="usr" #userName>
+        </div>
+    </div>
+    <div class="col-sm-2">
+      <button (click)="open(userName.value)" type="button" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
+    </div>
+    <div class="col-sm-1"> </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-3"> </div>
+    <div class="col-sm-6">
+      <div *ngIf="messages">
+            &nbsp;Getting  <strong>{{ limit }} results: </strong>
+            <p> &nbsp;{{ postResult }} <p>
+          <div  *ngFor="let message of messages">
+              <app-post
+                [message] = "message">
+            </app-post>
+          </div>
+    </div>
+
+    <div *ngIf = "loading" style=" text-align: center;">
+            <i class="fas fa-circle-notch fa-spin" style="font-size:50px; color:slategrey"></i>
+     </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>

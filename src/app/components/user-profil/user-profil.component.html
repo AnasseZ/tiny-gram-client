@@ -3,64 +3,123 @@
 <br>
 
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3">
-        <strong><p> Switch between accounts for testing scalability ➡️</p> </strong>
-      </div>
-      <div class="col-sm-3" id="btn-followed">
-        <h5>Account followed by : {{ limit }} people</h5>
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimit(100)">100</button>
-            <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimit(1000)" >1000</button>
-            <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimit(5000)">5000</button>
-        </div>
-      </div>
-      <div class="col-sm-3" id="btn-followed">
-        <h5>Getting  {{ limitMsg }} messages</h5>
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimitMsg(10)">10</button>
-            <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimitMsg(50)" >50</button>
-            <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimitMsg(100)">100</button>
-        </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <strong><p> Switch between accounts for testing scalability ➡️</p> </strong>
+    </div>
+    <div class="col-sm-3" id="btn-followed">
+      <h5>Account followed by : {{ limit }} people</h5>
+      <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimit(100)">100</button>
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimit(1000)" >1000</button>
+          <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimit(5000)">5000</button>
       </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <div class="row">
-      <div class="col-sm-3">
+    <div class="col-sm-3" id="btn-followed">
+      <h5>Getting  {{ limitMsg }} messages</h5>
+      <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="updateLimitMsg(10)">10</button>
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="updateLimitMsg(50)" >50</button>
+          <button type="button" class="btn btn-outline-info btn-sm" (click)="updateLimitMsg(100)">100</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-3">
 
-      </div>
-      <div class="col-sm-6">
-        <span style="font-style:italic">What's up?</span>
-        <app-whatsup *ngIf="user"
-        [user] = "user">
-      </app-whatsup>
-      </div>
     </div>
-    <div class="row">
-      <div class="col-sm-3">
-          <div *ngIf="user" >
-              <div class="card" style="width:250px;">
-                  <img class="card-img-top" src="{{ user.avatar }}"
-                   alt="Your avatar">
-                  <div class="card-body">
-                    <h4 class="card-title">{{ user.firstName }} {{ user.lastName }}</h4>
-                    <p class="card-text">{{ user.userName }}</p>
-                    <button href="#" class="btn btn-outline-dark">Settings</button>
+    <div class="col-sm-6">
+      <span style="font-style:italic">What's up?</span>
+      <app-whatsup *ngIf="user"
+      [user] = "user">
+    </app-whatsup>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+        <div *ngIf="user" >
+            <div class="card" style="width:250px;">
+                <img class="card-img-top" src="{{ user.avatar }}"
+                 alt="Your avatar">
+                <div class="card-body">
+                  <h4 class="card-title">{{ user.firstName }} {{ user.lastName }}</h4>
+                  <p class="card-text"> <i>@{{ user.userName }} </i></p>
+                  <div class="form-group row">
+                    <button href="#" class="btn btn-outline-dark" (click)="open(settings)">Settings</button>&nbsp;
+                    <button href="#" class="btn btn-outline-dark" (click)="open(content)"> {{ user.followers.length}} followers</button>
                   </div>
                 </div>
-             </div>
-      </div>
-      <div class="col-sm-6">
-        <app-timeline
-        [limit] = "limit"
-        [limitMsg] = "limitMsg" >
-        </app-timeline>
-      </div>
-      <div class="col-sm-3"> nothing now</div>
+              </div>
+           </div>
     </div>
+    <div class="col-sm-6">
+      <app-timeline
+      [limit] = "limit"
+      [limitMsg] = "limitMsg" >
+      </app-timeline>
+    </div>
+    <div class="col-sm-3"> nothing now</div>
+  </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Find a follower by his username</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>Username:</p>
+        <div class="form-group">
+            <input type="text" class="form-control" id="findUser" #username>
+        </div>
+        <br>
+        <div *ngIf="userSearched">
+          {{ userSearched.firstName }} {{ userSearched.lastName }} found ! Wanna follow him?
+          <button href="#" class="btn btn-outline-primary" (click)="c('Close click'); followUser();">Follow</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary" (click)="findUser(username.value);">Search  <i class="fas fa-search"></i></button>
+    </div>
+</ng-template>
+
+<ng-template #settings let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Update your personnal informations</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>Username:</p>
+        <div class="form-group">
+            <input type="text" class="form-control" value="{{ user.userName }}" #usernameSettings>
+        </div>
+        <p>Firstname:</p>
+        <div class="form-group">
+            <input type="text" class="form-control"  value="{{ user.firstName }}" #firstnameSettings>
+        </div>
+        <p>LastName:</p>
+        <div class="form-group">
+            <input type="text" class="form-control"  value="{{ user.lastName }}" #lastnameSettings>
+        </div>
+        <p>Avatar url:</p>
+        <div class="form-group">
+            <input type="text" class="form-control"  value="{{ user.avatar }}" #avatarSettings>
+        </div>
+    </div>
+    <div class="modal-footer">
+      Update settings &nbsp;
+      <button href="#" class="btn btn-outline-primary" (click)="c('Close click'); updateInformations(usernameSettings.value, firstnameSettings.value, lastnameSettings.value, avatarSettings.value);">
+        Update <i class="far fa-edit"></i>
+      </button>    
+    </div>
+</ng-template>
 
 
 <app-footer></app-footer>

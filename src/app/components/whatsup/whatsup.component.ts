@@ -5,6 +5,7 @@ import { MessageService } from '../../services/MessageService';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { getSplitedContent } from "../../services/Utils";
+import { User } from '../../entity/User';
 
 @Component({
   selector: 'app-whatsup',
@@ -13,7 +14,7 @@ import { getSplitedContent } from "../../services/Utils";
 })
 export class WhatsupComponent implements OnInit {
 
-  @Input() user: Object;
+  @Input() user: User;
   postResult: string;
 
   constructor(private messageService: MessageService, private modalService: NgbModal, private sanitizer: DomSanitizer) { 

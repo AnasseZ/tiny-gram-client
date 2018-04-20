@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { MessageService } from '../../services/MessageService';
+import { Message } from '../../entity/Message';
 
 @Component({
   selector: 'app-timeline',
@@ -10,7 +11,7 @@ import { MessageService } from '../../services/MessageService';
 export class TimelineComponent implements OnInit {
 
   postResult: string;
-  messages: Object[];
+  messages: Message[];
   @Input() limit: number;
   @Input() limitMsg: number;
   loading: boolean;
@@ -36,7 +37,7 @@ export class TimelineComponent implements OnInit {
     this.messages = [];
     this.postResult = "Gettin your timeline...";
     this.loading = true;
-    this.getTimeline();
+    //this.getTimeline();
   } 
 
   getTimeline(): void {

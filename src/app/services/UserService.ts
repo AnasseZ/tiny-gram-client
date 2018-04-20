@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 
 import { getUserByLimit } from './Utils'; 
+import { User } from '../entity/User';
 
 //declare const gapi: any;
 
@@ -42,11 +43,11 @@ export class UserService {
     );
   } */
 
-  getUser(limit: number): Observable<Object> {
+  getUser(limit: number): Observable<User> {
     return this.http
       .get(this.API_URL +'findUser/' + getUserByLimit(limit))
       .map((response: Response) => {
-          return <Object[]>response.json();
+          return <User[]>response.json();
       })
       .catch(this.handleError);
   }
