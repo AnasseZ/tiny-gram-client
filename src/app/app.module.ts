@@ -24,7 +24,7 @@ import { HashtagSearchComponent } from './components/hashtag-search/hashtag-sear
 const appRoutes: Routes = [
   { path: 'user-profil', component: UserProfilComponent },
   { path: 'home-page', component: HomePageComponent },
-  { path: '', redirectTo: '/home-page', pathMatch: 'full'}
+  { path: '', redirectTo: '/home-page', pathMatch: 'full'},
   { path: 'search-hashtags', component: HashtagSearchComponent },
   { path: 'search-hashtags/:hashtag', component: HashtagSearchComponent },
 ];
