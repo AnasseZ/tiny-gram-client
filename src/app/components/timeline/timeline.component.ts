@@ -37,7 +37,7 @@ export class TimelineComponent implements OnInit {
     this.messages = [];
     this.postResult = "Gettin your timeline...";
     this.loading = true;
-    //this.getTimeline();
+    this.getTimeline();
   } 
 
   getTimeline(): void {

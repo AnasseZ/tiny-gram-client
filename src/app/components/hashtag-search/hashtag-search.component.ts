@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../services/MessageService';
 import { Message } from '../../entity/Message';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-hashtag-search',
@@ -14,7 +15,13 @@ export class HashtagSearchComponent implements OnInit {
   loading: boolean;
   postResult: string;
 
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService,  private route: ActivatedRoute) {
+    this.limit = 5;
+    this.loading = false;
+    this.route.params.subscribe( params => {
+      if(params['hashtag']) this.searchByHashtag(params['hashtag']);
+    });
+  }
 
   updateLimit(limit: number) {
     if( this.limit! = limit) {
@@ -23,8 +30,6 @@ export class HashtagSearchComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.limit = 5;
-    this.loading = false;
   }
 
   searchByHashtag(hashtag: string) {

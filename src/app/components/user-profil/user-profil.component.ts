@@ -74,6 +74,17 @@ export class UserProfilComponent implements OnInit {
   }
 
   updateInformations(username: string, firstname: string, lastname: string, avatar: string) {
+    this.user.userName = username;
+    this.user.firstName = firstname;
+    this.user.lastName = lastname;
+    this.user.avatar = avatar;
 
+    this.userService.updateInformations(this.user)
+    .subscribe(
+        resultArray => {
+          this.user = resultArray;
+        },
+        error => console.log("Error :: " + error)
+    );
   }
 }

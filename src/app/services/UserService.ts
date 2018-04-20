@@ -79,6 +79,15 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  updateInformations(user: User) {
+    return this.http
+    .post(this.API_URL + 'update-user/', user)
+    .map((response: Response) => {
+        return <User[]>response.json().items;
+    })
+    .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
   }

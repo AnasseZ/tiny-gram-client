@@ -18,7 +18,7 @@
     class="img-thumbnail" alt="user profil" width="400" height="200">
     <p> {{ message.content }}</p>
     <p >
-        <a *ngFor="let hashtag of message.hashtags" href="#">{{ hashtag }} </a> 
+        <a *ngFor="let hashtag of message.hashtags" routerLink="/search-hashtags/{{ hashtag }}" routerLinkActive="active">{{ hashtag }} </a> 
     </p>
 </div>
 
