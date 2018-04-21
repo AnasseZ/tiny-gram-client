@@ -51,7 +51,7 @@
                  alt="Your avatar">
                 <div class="card-body">
                   <h4 class="card-title">{{ user.firstName }} {{ user.lastName }}</h4>
-                  <p class="card-text"> <i>@{{ user.userName }} </i></p>
+                  <p class="card-text"> <i>@{{ user.userName }} - {{ user.id }}</i></p>
                   <div class="form-group row">
                     <button href="#" class="btn btn-outline-dark" (click)="open(settings)">Settings</button>&nbsp;
                     <button href="#" class="btn btn-outline-dark" (click)="open(content)"> {{ user.followers.length}} followers</button>
