@@ -31,7 +31,10 @@
     <div class="col-sm-3">
         <div *ngIf="updated" class="alert alert-success">
             <strong>Success!</strong> User updated.
-          </div>
+        </div>
+        <div *ngIf="followed" class="alert alert-success">
+            <strong>Success!</strong> {{ userSearched.firstName }} {{ userSearched.lastName }} followed.
+        </div>
     </div>
     <div class="col-sm-6">
       <span style="font-style:italic">What's up?</span>
@@ -69,7 +72,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title">Find a follower by his id</h4>
+      <h4 class="modal-title">Find a user by his id</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -78,16 +81,16 @@
         <p>Users's id range is "u0, u1, ...., u5000"</p>
         <p>Id:</p>
         <div class="form-group">
-            <input type="text" class="form-control" id="findUser" #username>
+            <input type="text" class="form-control" id="findUser" #userId>
         </div>
         <br>
         <div *ngIf="userSearched">
-          {{ userSearched.firstName }} {{ userSearched.lastName }} found ! Wanna follow him?
+           <strong> {{ userSearched.firstName }} {{ userSearched.lastName }} </strong> found ! Wanna follow him?
           <button href="#" class="btn btn-outline-primary" (click)="c('Close click'); followUser();">Follow</button>
         </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-primary" (click)="findUser(username.value);">Search  <i class="fas fa-search"></i></button>
+      <button type="button" class="btn btn-outline-primary" (click)="findUser(userId.value);">Search  <i class="fas fa-search"></i></button>
     </div>
 </ng-template>
 

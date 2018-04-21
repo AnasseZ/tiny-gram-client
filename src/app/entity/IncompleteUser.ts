@@ -3,6 +3,7 @@ export class IncompleteUser {
 	firstName: String;
     lastName: String;
     userName: String;
+    id: String;
 
 	constructor() {
 		

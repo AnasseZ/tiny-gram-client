@@ -52,9 +52,9 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  findUserByUsername(userName: string) {
+  findUserById(userId: string) {
     return this.http
-      .get(this.API_URL +'find-by-username/' + userName)
+      .get(this.API_URL +'findUser/' + userId)
       .map((response: Response) => {
           return <User[]>response.json();
       })

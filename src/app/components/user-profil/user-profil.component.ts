@@ -16,6 +16,7 @@ export class UserProfilComponent implements OnInit {
   user: User;
   userSearched: User;
   updated: boolean;
+  followed: boolean;
 
   constructor(private userService: UserService, private modalService: NgbModal) {
    }
@@ -24,6 +25,8 @@ export class UserProfilComponent implements OnInit {
     this.limit = 100;
     this.limitMsg = 10;
     this.updated = false;
+    this.followed = false;
+    this.userSearched = null;
     this.getUser();
   }
 
@@ -54,8 +57,8 @@ export class UserProfilComponent implements OnInit {
     });
   }
 
-  findUser(username: string) {
-    this.userService.findUserByUsername(username)
+  findUser(userId: string) {
+    this.userService.findUserById(userId)
     .subscribe(
         resultArray => {
           this.userSearched = resultArray;
@@ -68,11 +71,10 @@ export class UserProfilComponent implements OnInit {
     this.userService.followerUser(this.userSearched, this.user.id)
     .subscribe(
         resultArray => {
-          this.userSearched = resultArray;
+          this.followed = true;
         },
         error => console.log("Error :: " + error)
     );
-    this.userSearched = null;
   }
 
   updateInformations(username: string, firstname: string, lastname: string, avatar: string) {
