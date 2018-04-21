@@ -15,6 +15,7 @@ export class UserProfilComponent implements OnInit {
   limitMsg: number;
   user: User;
   userSearched: User;
+  updated: boolean;
 
   constructor(private userService: UserService, private modalService: NgbModal) {
    }
@@ -22,6 +23,7 @@ export class UserProfilComponent implements OnInit {
   ngOnInit() {
     this.limit = 100;
     this.limitMsg = 10;
+    this.updated = false;
     this.getUser();
   }
 
@@ -83,6 +85,7 @@ export class UserProfilComponent implements OnInit {
     .subscribe(
         resultArray => {
           this.user = resultArray;
+          this.updated = true;
         },
         error => console.log("Error :: " + error)
     );

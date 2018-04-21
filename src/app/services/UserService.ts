@@ -81,9 +81,9 @@ export class UserService {
 
   updateInformations(user: User) {
     return this.http
-    .post(this.API_URL + 'update-user/', user)
+    .put(this.API_URL + 'update-user', user)
     .map((response: Response) => {
-        return <User[]>response.json().items;
+        return <User[]>response.json();
     })
     .catch(this.handleError);
   }
