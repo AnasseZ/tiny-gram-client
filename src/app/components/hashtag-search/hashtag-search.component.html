@@ -17,7 +17,7 @@
     <div class="col-sm-1"> </div>
     <div class="col-sm-3">   <p>Find posts by Hashtags</p> </div>
     <div class="col-sm-2"> </div>
-    <div class="col-sm-3">   <p>Find posts from a User by his username</p> </div>
+    <div class="col-sm-3">   <p>Find posts from a User by his id (u0, ... ,u5000)</p> </div>
     <div class="col-sm-2"> </div>
     <div class="col-sm-1"> </div>
 </div>
@@ -47,7 +47,7 @@
     <div class="col-sm-3"> </div>
     <div class="col-sm-6">
       <div *ngIf="messages">
-            &nbsp;Getting  <strong>{{ limit }} results: </strong>
+            &nbsp;Getting  <strong>{{ limit }} results max: </strong>
             <p> &nbsp;{{ postResult }} <p>
           <div  *ngFor="let message of messages">
               <app-post
